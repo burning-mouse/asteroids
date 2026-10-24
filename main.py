@@ -42,6 +42,11 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+            for shot in shots:
+                if shot.collides_with(sprite):
+                    log_event("asteroid_shot")
+                    sprite.kill()
+                    shot.kill()
         dt = clock.tick(60) / 1000
 
    
