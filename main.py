@@ -42,6 +42,11 @@ def main():
             sprite.draw(screen)
         pygame.display.flip()
         updatable.update(dt)
+        for sprite in buff:
+            if player.collides_with(sprite):
+                log_event("player_buff")
+                sprite.kill()
+                player.buff_time = 2.0
         for sprite in asteroids:
             if player.collides_with(sprite):
                 log_event("player_hit")
