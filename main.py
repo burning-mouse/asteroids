@@ -1,13 +1,15 @@
 import sys
 import pygame
+import random
 
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, BUFFER_RADIUS
 from logger import log_state
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from logger import log_event
 from shot import Shot
+from shootingbuff import ShootingBuffer
 
 def main():
     pygame.init()
@@ -21,11 +23,14 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    buff = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
     Asteroid.containers = (updatable, drawable, asteroids)
     Shot.containers = (updatable, drawable, shots)
+    ShootingBuffer.containers = (updatable, drawable, buff)
     AsteroidField.containers = (updatable)
     asteroid_field = AsteroidField()
+    shooting_buffer = ShootingBuffer(pygame.Vector2(random.uniform(0, SCREEN_WIDTH), random.uniform(0, SCREEN_HEIGHT)), BUFFER_RADIUS)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     while True:
         log_state()
