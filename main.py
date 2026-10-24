@@ -45,7 +45,7 @@ def main():
             for shot in shots:
                 if shot.collides_with(sprite):
                     log_event("asteroid_shot")
-                    sprite.kill()
+                    sprite.split()
                     shot.kill()
         dt = clock.tick(60) / 1000
 
